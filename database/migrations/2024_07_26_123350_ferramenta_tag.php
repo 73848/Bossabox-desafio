@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('flights', function  (Blueprint $table){
-                $table->id();
-                $table->string("title");
-                $table->link("description");
-
-        });
+        Schema::create('ferramenta_tag', function(Blueprint $table){
+            $table->foreignId('ferramenta_id')->constrained()->onDelete('cascade');
+            $table->foreignId('tag_id')->constrained()->onDelete('cascade');
+        }
+            
+    );
     }
 
     /**
