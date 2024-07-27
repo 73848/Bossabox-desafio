@@ -18,5 +18,6 @@ class DatabaseSeeder extends Seeder
 
        $this->call(FerramentasTableSeeder::class);
        $this->call(TagTableSeeder::class);
+       $this->call(FerramentasTagTableSeeder::class);
     }
 }

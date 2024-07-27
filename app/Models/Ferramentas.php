@@ -21,7 +21,7 @@ class Ferramentas extends Model
     public $timestamps = false;
 
     public function tags(){
-        return $this->belongsToMany(Tags::class );
+        return $this->belongsToMany(Tags::class, 'ferramentas_tags', 'ferramenta_id', 'tag_id' );
     }
 
 }
