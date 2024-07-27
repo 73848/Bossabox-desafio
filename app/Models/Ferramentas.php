@@ -10,12 +10,15 @@ class Ferramentas extends Model
     use HasFactory;
 
     protected $fillable = [
+        'id',
         'title',
         'descriptions',
+        'link',
         'tags'
     ];
 
     protected $table = 'ferramentas';
+    public $timestamps = false;
 
     public function tags(){
         return $this->belongsToMany(Tags::class );

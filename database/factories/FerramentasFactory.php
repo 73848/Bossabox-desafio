@@ -19,7 +19,8 @@ class FerramentasFactory extends Factory
         return [
             'id'=>fake()->unique()->numerify(),
             'title'=>fake()->word(),
-            'link'=>fake()->sentence(6)
+            'link'=>fake()->url(),
+            'description'=>fake()->sentence(6)
         ];
     }
 }

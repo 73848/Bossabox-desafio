@@ -13,7 +13,8 @@ class Tags extends Model
         'name'
     ];
 
-    protected $table = 'tags';
+    protected $table = 'tag';
+    public $timestamps = false;
 
     public function tags(){
         return $this->belongsToMany(Tags::class);

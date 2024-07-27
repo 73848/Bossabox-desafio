@@ -18,7 +18,7 @@ class TagsFactory extends Factory
     {
         return [
                 'id'=>fake()->unique()->numerify(),
-                'name'=>fake()->randomElements(['PHP', 'Node', 'Java', 'Laravel', 'PHP Faker', 'Composer', 'json', 'http2', 'api', 'web', 'rest']),
+                'name'=>fake()->unique()->randomElement(['PHP', 'Node', 'Java', 'Laravel', 'PHP Faker', 'Composer', 'json', 'http2', 'api', 'web', 'rest']),
         ];
     }
 }
