@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Ferramentas;
 class FerramentasController extends Controller
 {
     /**
@@ -11,7 +11,8 @@ class FerramentasController extends Controller
      */
     public function index()
     {
-        //
+         $ferramentas = Ferramentas::with('tags')->get();
+         return response()->json(['ferramentas'=>$ferramentas], 200);
     }
 
     /**
@@ -19,7 +20,6 @@ class FerramentasController extends Controller
      */
     public function store(Request $request)
     {
-        dd('Deus é bom');
     }
 
     /**
@@ -27,7 +27,8 @@ class FerramentasController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $ferramenta = Ferramentas::findOrfail($id);
+        return response()->json($ferramenta);
     }
 
     /**
