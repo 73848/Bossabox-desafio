@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-
+use App\Http\Resources\TagsResource;
 class FerramentasResource extends JsonResource
 {
     /**
@@ -18,7 +18,8 @@ class FerramentasResource extends JsonResource
             'id'=> $this->id,
             'title'=> $this->title,
             'link'=> $this->link,
-            'description'=> $this->description
+            'description'=> $this->description,
+            'tags'=> TagsResource::collection($this->tags)
         ];
     }
 }
