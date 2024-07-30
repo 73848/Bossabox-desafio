@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\FerramentasResource;
 use Illuminate\Http\Request;
 use App\Models\Ferramentas;
 class FerramentasController extends Controller
@@ -11,8 +12,9 @@ class FerramentasController extends Controller
      */
     public function index()
     {
-         $ferramentas = Ferramentas::with('tags')->get();
-         return response()->json(['ferramentas'=>$ferramentas], 200);
+         $ferramentas = Ferramentas::with('tags')->get(); // recuperando as ferramentas com as tags associadas
+       //  return response()->json(['ferramentas'=>$ferramentas], 200);
+       return  FerramentasResource::collection($ferramentas);
     }
 
     /**
