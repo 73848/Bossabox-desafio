@@ -12,7 +12,7 @@ class FerramentasController extends Controller
      */
     public function index()
     {
-         $ferramentas = Ferramentas::with('tags')->get(); // recuperando as ferramentas com as tags associadas
+         $ferramentas = Ferramentas::with('tags')->paginate(10); // recuperando as ferramentas com as tags associadas
        //  return response()->json(['ferramentas'=>$ferramentas], 200);
        return  FerramentasResource::collection($ferramentas);
     }
