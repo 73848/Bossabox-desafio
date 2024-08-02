@@ -14,7 +14,7 @@ class FerramentasTagTableSeeder extends Seeder
     public function run(): void
     {
      foreach(Ferramentas::all() as $ferramenta){
-        $tags = Tags::inRandomOrder()->take(1,5)->pluck('id')->toArray();
+        $tags = Tags::inRandomOrder()->take(3)->pluck('id')->toArray();
         $ferramenta->tags()->attach($tags);
      }   
     }

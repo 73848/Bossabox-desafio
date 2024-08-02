@@ -22,17 +22,21 @@ class FerramentasController extends Controller
      */
     public function store(Request $request)
     {
+
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $tag )
     {
-        $ferramenta = Ferramentas::findOrfail($id);
-        return response()->json($ferramenta);
+        $ferramentas = Ferramentas::with('tags')->whereHas('tags', function ($q) use ($tag){
+            $q->where('name', $tag);
+        })->paginate(5);
+       
+       return FerramentasResource::collection($ferramentas);
     }
-
+   
     /**
      * Update the specified resource in storage.
      */
