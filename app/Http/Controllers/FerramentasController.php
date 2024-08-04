@@ -21,29 +21,29 @@ class FerramentasController extends Controller
     public function store(Request $request)
     {
 
-        $request->validate([
-            'title'=>'required|string|max:255',
-            'link'=> 'required|url|max:255',
-            'descriptions' => 'required|string|max:255',
-            'tags'=> 'required|array',
-            'tags.*.*' => 'required|distinct|max:255'
-        ]);
+      
+        try{ 
+            $ferramentas = new Ferramentas();
+
+            # Salvando a ferramenta
+            $ferramentas->title = $request->title;
+            $ferramentas->link = $request->link;    
+            $ferramentas->description = $request->description;   
+            $ferramentas->save();
+            
+            # Salvando as tags associadas a ferramenta
+            foreach($request->tags as $tagName){
+                $tag = Tags::firstOrCreate(['name'=>$tagName]);
+                $ferramentas->tags()->attach($tag); 
+            }
 
 
+            return  FerramentasResource::collection($ferramentas);
 
-        $ferramentas = Ferramentas::create($request->only(['title', 'link', 'descriptions']));
-
-        $tags = [];
-
-        foreach($request->input('tags') as $tagName){
-            $tag = Tags::firstOrCreate(['name'=>$tagName])->id;
-            $tags[] = $tag;
+        }catch(\Exception $e){
+            return response()->json(['error'=>'Erro ao salvar ferramenta ', $e], 500);
         }
-
-        $ferramentas->tags()->attach($tags);
-        dd($ferramentas->load('tags'));
-        return response()->json($ferramentas->load('tags'), 201);
-
+        
     }
 
     public function show(string $tag )
