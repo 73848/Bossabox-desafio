@@ -18,7 +18,7 @@ class FerramentasFactory extends Factory
     {
         return [
             'id'=>fake()->unique()->numerify(),
-            'title'=>fake()->word(),
+            'title'=>strtolower(fake()->unique()->randomElement(['FastFy', 'json-server', 'servico em nuvem', 'processamento paralelo', 'Notion', 'Github', 'Ias generativas', 'Microsoft Excel', 'Desenvolvimento de Software', 'Dev c#', 'Vaga para gringa'])),
             'link'=>fake()->url(),
             'description'=>fake()->sentence(6)
         ];
