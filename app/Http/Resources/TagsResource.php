@@ -14,6 +14,8 @@ class TagsResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return [strtolower($this->name)];
+       
+
+        return [$this->name];
     }
 }
