@@ -19,7 +19,7 @@ class FerramentasResource extends JsonResource
             'title'=> $this->title,
             'link'=> $this->link,
             'description'=> $this->description,
-            'tags'=> TagsResource::collection($this->tags)
+            'tags'=> TagsResource::collection($this->tags)->pluck('name')
         ];
     }
 }

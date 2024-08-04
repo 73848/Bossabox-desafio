@@ -9,4 +9,5 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::get('ferramentas', [FerramentasController::class, 'index']);    
-Route::get('ferramentas/{tag}', [FerramentasController::class, 'show']);    
+Route::get('ferramentas/api/{tag}', [FerramentasController::class, 'show']);    
+Route::post('ferramentas', [FerramentasController::class, 'store']);
