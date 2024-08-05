@@ -34,7 +34,7 @@ class FerramentasController extends Controller
             # Salvando as tags associadas a ferramenta
             foreach($request->tags as $tagName){
                 $tag = Tags::firstOrCreate(['name'=>$tagName]);
-                $ferramentas->tags()->attach(strtolower($tag)); 
+                $ferramentas->tags()->attach($tag); 
             }
 
 

@@ -16,6 +16,6 @@ class TagsResource extends JsonResource
     {
        
 
-        return [$this->name];
+        return [strtolower($this->name)];
     }
 }
