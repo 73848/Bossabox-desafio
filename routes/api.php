@@ -10,4 +10,4 @@ Route::get('/user', function (Request $request) {
 
 Route::get('ferramentas', [FerramentasController::class, 'index']);    
 Route::get('ferramentas/api/{tag}', [FerramentasController::class, 'show']);    
-Route::post('ferramentas', [FerramentasController::class, 'store']);
+Route::post('ferramentas', [FerramentasController::class, 'store'])->name('store');
