@@ -13,7 +13,7 @@ class FerramentasController extends Controller
     {
         $ferramentas = Ferramentas::with('tags')->paginate(10); // recuperando as ferramentas com as tags associadas
        //  return response()->json(['ferramentas'=>$ferramentas], 200);
-       return  FerramentasResource::collection($ferramentas)->toJson();
+       return response()->json(['status'=> 200,'ferramentas'=>FerramentasResource::collection($ferramentas)]);
     }
 
     public function store(Request $request)
@@ -59,7 +59,7 @@ class FerramentasController extends Controller
             })
             ->paginate(5);
         }
-        return FerramentasResource::collection($ferramentas)->toJson();
+        return response()->json([ 'status'=> 200, 'ferramenta'=>(FerramentasResource::collection($ferramentas))]);
     }
    
   
