@@ -21,8 +21,6 @@ class FerramentasController extends Controller
 
     public function store(Request $request)
     {
-
-      
         try{ 
             $ferramentas = new Ferramentas();
 
@@ -31,7 +29,6 @@ class FerramentasController extends Controller
             $ferramentas->link = $request->link;    
             $ferramentas->description = $request->description;   
             $ferramentas->save($request->only(['title', 'link','description']));
-            $idFerramenta = $ferramentas->id;
             # Salvando as tags associadas aa ferramenta
             $tags = [];
             foreach($request->tags as $tagName){
@@ -43,7 +40,6 @@ class FerramentasController extends Controller
             
             $controller = new FerramentasController();
             return $controller->show($name, true);
-                # Achar um jeito de mostrar o input passado na forma como esta no desafio
         }catch(\Exception $e){
             return response()->json(['error'=>'Erro ao salvar ferramenta ', $e], 500);
         }
@@ -67,8 +63,6 @@ class FerramentasController extends Controller
             ->paginate(5);
         }
         return FerramentasResource::collection($ferramentas);
-           
-
     }
    
   

@@ -8,6 +8,6 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::get('ferramentas', [FerramentasController::class, 'index']);    
+Route::get('ferramentas', [FerramentasController::class, 'index'])->name('index');    
 Route::get('ferramentas/api/{tag}', [FerramentasController::class, 'show']);    
 Route::post('ferramentas', [FerramentasController::class, 'store'])->name('store');
