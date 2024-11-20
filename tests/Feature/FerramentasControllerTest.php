@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Http\Controllers\FerramentasController;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -18,22 +19,26 @@ class FerramentasControllerTest extends TestCase
 
         $response->assertStatus(200);
     }
-    public function test_index_are_return_json_corretly()
+    public function test_index_are_return_json_format_corretly()
     {
-        $response = $this
+            $this
             ->getJson('api/ferramentas')
             ->assertOk()
             ->assertJsonStructure(
             [
-            'data' => [
-                [
-                'id',
+            [   'id',
                 'title',
                 'description',
                 'tags'
-                ]
             ]
             ]
+            
             );
+    }
+    public function test_show_are_return_json_format_corretly(){
+        $controller = new FerramentasController();
+        $response = $controller->show('node');
+        $this->assertJson($response);
+       
     }
 }

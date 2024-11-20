@@ -6,7 +6,6 @@ use App\Http\Resources\FerramentasResource;
 use Illuminate\Http\Request;
 use App\Models\Ferramentas;
 use App\Models\Tags;
-use Illuminate\Support\Facades\DB;
 
 class FerramentasController extends Controller
 {
@@ -14,9 +13,7 @@ class FerramentasController extends Controller
     {
         $ferramentas = Ferramentas::with('tags')->paginate(10); // recuperando as ferramentas com as tags associadas
        //  return response()->json(['ferramentas'=>$ferramentas], 200);
-       
-       return  FerramentasResource::collection($ferramentas);
-
+       return  FerramentasResource::collection($ferramentas)->toJson();
     }
 
     public function store(Request $request)
@@ -62,7 +59,7 @@ class FerramentasController extends Controller
             })
             ->paginate(5);
         }
-        return FerramentasResource::collection($ferramentas);
+        return FerramentasResource::collection($ferramentas)->toJson();
     }
    
   
