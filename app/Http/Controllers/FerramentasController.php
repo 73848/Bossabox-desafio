@@ -31,34 +31,44 @@ class FerramentasController extends Controller
             $ferramentas->link = $request->link;    
             $ferramentas->description = $request->description;   
             $ferramentas->save($request->only(['title', 'link','description']));
-            
-            # Salvando as tags associadas a ferramenta
+            $idFerramenta = $ferramentas->id;
+            # Salvando as tags associadas aa ferramenta
             $tags = [];
             foreach($request->tags as $tagName){
                 $tag = Tags::firstOrCreate(['name'=>$tagName]);
-                $id = DB::table('tags')->where('name', $tagName)->get('id');
                  $tags[] = $tag->id;
+                $name = $tagName;
                 }
             $ferramentas->tags()->attach($tags); 
-
-
-            return  FerramentasResource::collection($ferramentas);
-
+            
+            $controller = new FerramentasController();
+            return $controller->show($name, true);
+                # Achar um jeito de mostrar o input passado na forma como esta no desafio
         }catch(\Exception $e){
             return response()->json(['error'=>'Erro ao salvar ferramenta ', $e], 500);
         }
         
     }
 
-    public function show(string $tag )
+    public function show(string $tag, bool $OnlyOne=false )
     {
-        $ferramentas = Ferramentas::with('tags')
-        ->whereHas('tags', function ($q) use ($tag){
-            $q->where('name', $tag);
-        })
-        ->paginate(5);
-       
-       return FerramentasResource::collection($ferramentas);
+        # Tive que colocar esse if pois uso a funcao show() na funcao store e preciso retornar apenas um elemento nela
+        if ($OnlyOne) {
+            $ferramentas = Ferramentas::with('tags')
+            ->whereHas('tags', function ($q) use ($tag){
+                $q->where('name', $tag);
+            })
+            ->paginate(1);
+        }else{
+            $ferramentas = Ferramentas::with('tags')
+            ->whereHas('tags', function ($q) use ($tag){
+                $q->where('name', $tag);
+            })
+            ->paginate(5);
+        }
+        return FerramentasResource::collection($ferramentas);
+           
+
     }
    
   
